@@ -1,4 +1,5 @@
 import os
+import random
 import atexit
 import progressbar
 from ftplib import FTP
@@ -28,12 +29,12 @@ def download_folder(ftp, folder):
   ftp.cwd(folder)
   ls = ftp.nlst()
   files = [f for f in ls if '.' in f]
+  dirs = [d for d in ls if '.' not in d]
   
   if is_root:
     print('Baixando arquivos...')
-  else:
-    files = [f for f in files if not os.path.isfile(f'marketData/{folder}/{f}')]
-
+    
+  files = [f for f in files if not os.path.isfile(f'marketData/{folder}/{f}')]
   with progressbar.ProgressBar(max_value=len(files)) as bar:
     for i, f in enumerate(files):
       if is_root:
@@ -43,12 +44,12 @@ def download_folder(ftp, folder):
         download_file(ftp, f, folder)
         bar.update(i)
 
-  dirs = list(set(ls) - set(files))
 
   for folder in dirs:
     mkdir(f'marketData/{folder}/')
     print(f'Baixando arquivos da pasta marketData/{folder}')
     download_folder(ftp, folder)
+    ftp.cwd('..')
 
 
 def exit_handler(ftp):
