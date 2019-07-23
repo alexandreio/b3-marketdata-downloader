@@ -19,7 +19,6 @@ def download_file(ftp, f, folder=None):
   output_file = f'marketData/{f}'
   if folder:
     output_file = f'marketData/{folder}/{f}'
-
   if not os.path.isfile(output_file):
     ftp.retrbinary("RETR " + f, open(output_file, 'wb').write)
 
@@ -29,18 +28,12 @@ def download_folder(ftp, folder):
   ftp.cwd(folder)
   ls = ftp.nlst()
   files = [f for f in ls if '.' in f]
-  dirs = list(set(ls) - set(files))
   
   if is_root:
     print('Baixando arquivos...')
-  
-  widgets = [
-    ' [', progressbar.SimpleProgress(), '] ',
-    progressbar.Bar(),
-    ' [', progressbar.AdaptiveTransferSpeed(), '] ',
-    ' [', progressbar.Timer(), '] ',
-    ' (', progressbar.AdaptiveETA(), ') ']
-  
+  else:
+    files = [f for f in files if not os.path.isfile(f'marketData/{folder}/{f}')]
+
   with progressbar.ProgressBar(max_value=len(files)) as bar:
     for i, f in enumerate(files):
       if is_root:
@@ -49,6 +42,8 @@ def download_folder(ftp, folder):
       else:
         download_file(ftp, f, folder)
         bar.update(i)
+
+  dirs = list(set(ls) - set(files))
 
   for folder in dirs:
     mkdir(f'marketData/{folder}/')
