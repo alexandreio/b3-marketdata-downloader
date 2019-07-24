@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 import os
 import time
 import queue
@@ -13,6 +15,8 @@ upLock = threading.Lock()
 queueLock = threading.Lock()
 workQueue = queue.Queue()
 
+# Classe inspirada no artigo do link abaixo:
+# https://www.tutorialspoint.com/python3/python_multithreading
 class myThread (threading.Thread):
     def __init__(self, threadID, q):
         threading.Thread.__init__(self)
