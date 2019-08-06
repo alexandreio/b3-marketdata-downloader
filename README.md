@@ -1,8 +1,6 @@
 # b3-marketdata-downloader
 
-A B3 irá descontinuar seu servidor de FTP agora dia 31/07/2019. [link](http://www.b3.com.br/data/files/40/76/60/59/745666102F630666AC094EA8/CE%20018-2019%20-%20Prorroga%C3%A7%C3%A3o%20do%20Prazo%20de%20Desativa%C3%A7%C3%A3o%20do%20Servior%20FTP.pdf)
-
-Esse script tem como objetivo baixar todos arquivos disponíveis até a data limite.
+Esse script tem como objetivo baixar todos arquivos disponíveis até a data limite no FTP da B3.
 
 ## Instalação
 
