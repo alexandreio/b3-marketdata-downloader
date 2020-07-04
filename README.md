@@ -1,5 +1,8 @@
-# b3-marketdata-downloader
+# IMPORTANTE
+O portal de FTP foi desativado. Sendo assim o script não está funcionando já que a fonte de dados deixou de existir.
+Estarei trabalhando para transformar esse projeto em uma versão simplificada para download de séries diárias e outras infos do portal da B3.
 
+## b3-marketdata-downloader
 Esse script tem como objetivo baixar todos arquivos disponíveis até a data limite no FTP da B3.
 
 ## Instalação
